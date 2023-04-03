@@ -24,4 +24,9 @@ public class UserController {
         return userService.doesUserExists(username);
     }
 
+    @GetMapping("/admin")
+    public String getAdmin(){
+        return "You are admin";
+    }
+
 }
