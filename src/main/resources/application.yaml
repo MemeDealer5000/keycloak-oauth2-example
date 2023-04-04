@@ -1,1 +1,20 @@
-
+server:
+  port: ${SERVER_PORT:8081}
+spring:
+  application.name: ${APPLICATION_NAME:spring-security-keycloak}
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: app-login
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/auth/realms/app-login
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/auth/realms/app-login
+          jwk-set-uri: http://localhost:8080/auth/realms/app-login/protocol/openid-connect/certs
