@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
 @Configuration
 @EnableWebSecurity
@@ -16,6 +18,11 @@ public class WebSecurityConfig {
     final KeycloakLogoutHandler keycloakLogoutHandler;
     WebSecurityConfig(KeycloakLogoutHandler logoutHandler){
         this.keycloakLogoutHandler = logoutHandler;
+    }
+
+    @Bean
+    protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
+        return new NullAuthenticatedSessionStrategy();
     }
 
     @Bean
