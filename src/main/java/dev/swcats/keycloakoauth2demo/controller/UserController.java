@@ -14,6 +14,13 @@ public class UserController {
     public UserController(UserService userService){
         this.userService = userService;
     }
+    @GetMapping("/anonymous")
+    public UserModel getAnon(){
+        return UserModel.builder()
+                .id(1L)
+                .username("anon")
+                .build();
+    }
     @GetMapping("/user/{username}")
     public UserModel getUser(@PathVariable String username){
         return userService.getUserByName(username);
