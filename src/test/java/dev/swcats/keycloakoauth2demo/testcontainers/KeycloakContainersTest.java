@@ -38,15 +38,12 @@ public class KeycloakContainersTest {
     @Autowired
     private MockMvc mockMvc;
 
-    // container {
     @Container
     public static KeycloakContainer keycloak = new KeycloakContainer("quay.io/keycloak/keycloak:21.0")
             .withExposedPorts(8080)
             .withRealmImportFile("keycloak/realm-export.json")
             .withStartupTimeout(Duration.of(2, ChronoUnit.MINUTES))
             .waitingFor(Wait.forHttp("/"));
-
-    // }
 
     @BeforeAll
     static void beforeAll() {
@@ -72,7 +69,6 @@ public class KeycloakContainersTest {
 
     @Test
     public void testAdminUsername() {
-        System.out.println(keycloak.getAuthServerUrl());
         Assertions.assertThat(keycloak.getAdminUsername()).isEqualTo("admin");
     }
 
